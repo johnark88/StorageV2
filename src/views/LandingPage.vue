@@ -1,9 +1,9 @@
 <template>
-  <div class="home">
+  <div class="LandingPage">
     <b-container>
       <b-row>
         <b-col>
-          <h1>Welcome Home page</h1>
+          <h1>Landing Page</h1>
         </b-col>
       </b-row>
     </b-container>
