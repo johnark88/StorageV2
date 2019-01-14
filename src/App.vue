@@ -21,7 +21,7 @@
           </b-navbar-nav>
         </b-collapse>
         <!-- v-show="!userStatus" -->
-        <b-nav-item > <router-link to="#">Sign in</router-link> </b-nav-item>
+        <b-nav-item > <router-link to="/login">Sign in</router-link> </b-nav-item>
         <!-- <b-nav-item v-show="userStatus">  </b-nav-item> -->
       </b-navbar>
     </div>
@@ -29,10 +29,11 @@
   </div>
 </template>
 <script>
+import signIn from '@/components/signIn.vue';
 export default {
   name: 'App',
   components: {
-   
+   signIn
   },
   data() {
     return {
@@ -42,15 +43,18 @@ export default {
 };
 </script>
 <style lang="scss">
+
+body,
+html {
+  background-color: #fff;
+}
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
 }
-body,
-html {
-  background-color: #fff;
+.nav-item {
+  list-style: none;
 }
-
 </style>
