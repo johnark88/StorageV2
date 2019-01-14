@@ -1,6 +1,6 @@
 <template>
   <div class="Navigation">
-    
+
   </div>
 </template>
 
@@ -10,7 +10,7 @@ export default {
   data() {
     return {
 
-    }
+    };
   },
   methods: {
     signIn() {
@@ -19,9 +19,9 @@ export default {
     signOut() {
 
     },
-  }
-}
+  },
+};
 </script>
 <style scoped lang="scss">
-  
+
 </style>
