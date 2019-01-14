@@ -1,24 +1,16 @@
 <template>
-  <div class="Navigation">
-
+  <div class="signIn">
+    
   </div>
 </template>
 
 <script>
 export default {
-  name: 'Navigation',
+  name: 'signIn',
   data() {
     return {
 
     };
-  },
-  methods: {
-    signIn() {
-
-    },
-    signOut() {
-
-    },
   },
 };
 </script>

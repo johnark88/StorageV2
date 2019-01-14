@@ -48,8 +48,28 @@
   </div>
 </template>
 <script>
+export default {
+  name: 'LandingPage',
+  data() {
+    return {
+
+    };
+  },
+  methods: {
+    signIn() {
+
+    },
+    signOut() {
+
+    },
+  },
+};
 </script>
 <style scoped lang="scss">
+  // navigation
+  .mainNavBar {
+    display: none;
+  }
   // header
   .container-fluid {
     padding: 0;
@@ -57,6 +77,10 @@
   .header {
     .tronButtons .btn {
       margin-left: 10px;
+    }
+    .jumbotron {
+      background-color: $colorAqua;
+      text-align: left;
     }
   }
 </style>
