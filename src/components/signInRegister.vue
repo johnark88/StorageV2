@@ -2,6 +2,10 @@
   <div class="signInRegister">
     <b-card class="userLoginCard">
       <b-form @submit.prevent="submit" id="loginForm">
+        <div class="signUpLink">
+          <b-link class="register" @click="decidedUser">or Sign Up</b-link>
+          <b-link></b-link>
+        </div>
         <b-form-group id="loginFirstName" label-for="loginFirstName" v-show="showRegister">
           <b-form-input id="loginFirstName" type="text" v-model="loginUser.firstName" v-validate="'required'"
                         placeholder="First name" name="First name">
@@ -22,7 +26,8 @@
         </b-form-group>
         <b-form-text class="text-muted">This page is protected by reCAPTCHA, and subject to the Google <a href="https://www.google.com/policies/privacy/">Privacy Policy</a> and <a href="https://www.google.com/policies/terms/">Terms of service.</a></b-form-text>
         <div class="signInOptions">
-          <b-btn @click="submit">Sign in</b-btn>
+          <b-btn @click="login" v-show="!showRegister">Sign in</b-btn>
+           <b-btn @click="register" v-show="showRegister">Sign Up</b-btn>
           <!-- checkBox = remeber me -->
           <!-- forgot password -->
         </div>
@@ -51,9 +56,35 @@ export default {
     ...mapGetters(['user']),
   },
   methods: {
-    submit() {
-      console.log(this.loginUser, 'loginUser');
-      this.$emit('loginUser', this.loginUser);
+    decidedUser() {
+      console.log(this.showRegister);
+      if (this.showRegister === false) {
+        this.showRegister = true;
+      } else {
+        this.showRegister = false;
+      }
+    },
+    async login() {
+      const email = this.newUser.email;
+      const password = this.newUser.password;
+      const auth = await this.$auth.login(email, password);
+      this.userid = auth.user.uid;
+      // this.getUserProfile();
+      this.$router.push('/home');
+    },
+    async register() {
+      const email = this.newUser.email;
+      const password = this.newUser.password;
+      const newAuth = await this.$auth.register(email, password)
+        .then((user) => {
+          console.log(user, 'user');
+        })
+        .catch((error) => {
+          // Handle Errors here.
+          var errorCode = error.code;
+          var errorMessage = error.message;
+          console.log(errorCode, ' code', errorMessage, 'msg');
+        });
     }
   }
 };
@@ -61,9 +92,13 @@ export default {
 <style scoped lang="scss">
 .card {
   border: none;
+  margin-top: -15px;
 }
 .signInOptions {
   float: right;
   padding-top: 10px;
+}
+.signUpLink {
+  float: right;
 }
 </style>
