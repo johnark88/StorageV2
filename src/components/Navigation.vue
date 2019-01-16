@@ -20,19 +20,38 @@
       </b-navbar-nav>
     </b-collapse>
     <!-- v-show="!userStatus" -->
-    <b-nav-item > <router-link to="/login">Sign in</router-link> </b-nav-item>
-    <!-- <b-nav-item v-show="userStatus">  </b-nav-item> -->
+    <b-nav-item v-show="!userStatus" > <router-link to="/login">Sign in</router-link> </b-nav-item>
+    <b-nav-item v-show="userStatus" @click="signOut"> Sign out </b-nav-item>
     </b-navbar>
   </div>
 </template>      
 <script>
+import { mapGetters } from 'vuex';
 export default {
   name: 'Navigation',
   data() {
     return {
-       
+       userStatus: false,
     };
   },
+  computed: {
+    ...mapGetters(['user']),
+  },
+  watch: {
+    user(auth) {
+      if(!auth) {
+        this.$router.push('/login');
+      } else {
+        this.userStatus = true
+      }
+    }
+  },
+  methods: {
+    async signOut() {
+      await this.$auth.logout();
+      this.$router.replace('/signout');
+    }
+  }
 };
 </script>
 <style scoped lang="scss">
