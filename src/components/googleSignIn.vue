@@ -22,7 +22,15 @@ export default {
   props: ['showRegisterForm'],
   data() {
     return {
-      
+      googleUser: {
+        firstName: null,
+        lastName: null,
+        uid: null,
+        password: null,
+        email: null,
+        photoUrl: null,
+        usedGoogle: true,
+      }
     };
   },
   methods: {
@@ -30,7 +38,14 @@ export default {
      const auth = await this.$auth.providerLogin()
       .then((user) => {
         console.log(user, 'g sign in');
-        console.log(user.credential.idToken);
+        // console.log(user.credential.idToken);
+        const fullName = user.user.displayName;
+        this.googleUser.firstName = fullName.split(' ')[0];
+        this.googleUser.lastName = fullName.split(' ')[1];
+        this.googleUser.uid = user.user.uid
+        this.this.googleUser.email = user.user.email;
+        this.googleUser.photoUrl = user.user.photoUrl;
+
         this.$router.push('/home');
       })
       .catch((error) => {
@@ -41,8 +56,6 @@ export default {
         var email = error.email;
         // The firebase.auth.AuthCredential type that was used.
         var credential = error.credential;
-        console.log(error);
-        console.log(error.message);
       })
     }
   }

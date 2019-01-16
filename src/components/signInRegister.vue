@@ -49,6 +49,7 @@ export default {
         email: null,
         password: null,
         uid: null,
+        usedGoogle: false,
       },
     };
   },
