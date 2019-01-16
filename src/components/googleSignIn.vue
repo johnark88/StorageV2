@@ -17,6 +17,7 @@
   </div>
 </template>
 <script>
+import store from '../store/store';
 export default {
   name: 'googleSignIn',
   props: ['showRegisterForm'],
@@ -30,6 +31,7 @@ export default {
         email: null,
         photoUrl: null,
         usedGoogle: true,
+        idToken: null,
       }
     };
   },
@@ -37,16 +39,18 @@ export default {
     async googleLogin() {
      const auth = await this.$auth.providerLogin()
       .then((user) => {
-        console.log(user, 'g sign in');
-        // console.log(user.credential.idToken);
         const fullName = user.user.displayName;
         this.googleUser.firstName = fullName.split(' ')[0];
         this.googleUser.lastName = fullName.split(' ')[1];
         this.googleUser.uid = user.user.uid
-        this.this.googleUser.email = user.user.email;
-        this.googleUser.photoUrl = user.user.photoUrl;
-
-        this.$router.push('/home');
+        this.googleUser.email = user.user.email;
+        this.googleUser.photoUrl = user.user.photoURL;
+        this.googleUser.idToken = user.credential.idToken;
+        // how to tell if its a first time user or returning with google?
+        //this.getUserProfile(); 
+        // this.saveUserProfile();
+        store.commit('updateAppUser', { appUser: this.googleUser });
+        this.validateToken();
       })
       .catch((error) => {
         // Handle Errors here.
@@ -57,6 +61,10 @@ export default {
         // The firebase.auth.AuthCredential type that was used.
         var credential = error.credential;
       })
+    },
+    validateToken() {
+      
+      this.$router.push('/home');
     }
   }
 };

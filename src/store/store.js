@@ -5,11 +5,16 @@ Vue.use(Vuex);
 
 const state = {
   user: null,
+  appUser: {},
 };
 
 const mutations = {
   updateUser(state, { user }) {
     Vue.set(state, 'user', user);
+  },
+  updateAppUser(state, payLoad) {
+    state.appUser = payLoad.appUser;
+    console.log(state.appUser);
   },
 };
 const actions = {
