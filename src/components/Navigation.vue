@@ -22,14 +22,15 @@
     <b-nav-item v-show="userStatus" @click="signOut"> Sign out </b-nav-item>
     </b-navbar>
   </div>
-</template>      
+</template>
 <script>
 import { mapGetters } from 'vuex';
+
 export default {
   name: 'Navigation',
   data() {
     return {
-       userStatus: false,
+      userStatus: false,
     };
   },
   computed: {
@@ -37,19 +38,19 @@ export default {
   },
   watch: {
     user(auth) {
-      if(!auth) {
+      if (!auth) {
         this.$router.push('/login');
       } else {
-        this.userStatus = true
+        this.userStatus = true;
       }
-    }
+    },
   },
   methods: {
     async signOut() {
       await this.$auth.logout();
       this.$router.replace('/signout');
-    }
-  }
+    },
+  },
 };
 </script>
 <style scoped lang="scss">

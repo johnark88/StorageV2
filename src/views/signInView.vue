@@ -22,8 +22,8 @@ import signInRegister from '@/components/signInRegister.vue';
 export default {
   name: 'signInView',
   components: {
-   signInRegister,
-   googleSignIn,
+    signInRegister,
+    googleSignIn,
   },
   data() {
     return {
@@ -33,8 +33,8 @@ export default {
   methods: {
     showRegForm(currentVal) {
       this.showRegisterForm = currentVal;
-    }
-  }
+    },
+  },
 };
 </script>
 <style scoped lang="scss">

@@ -12,10 +12,11 @@
 </template>
 <script>
 import homeComponent from '@/components/homeComponent.vue';
+
 export default {
   name: 'home',
   components: {
-    homeComponent
+    homeComponent,
   },
   data() {
     return {
@@ -23,7 +24,7 @@ export default {
     };
   },
   methods: {
-    
+
   },
 };
 </script>

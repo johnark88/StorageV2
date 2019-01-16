@@ -18,6 +18,7 @@
 </template>
 <script>
 import store from '../store/store';
+
 export default {
   name: 'googleSignIn',
   props: ['showRegisterForm'],
@@ -32,41 +33,40 @@ export default {
         photoUrl: null,
         usedGoogle: true,
         idToken: null,
-      }
+      },
     };
   },
   methods: {
     async googleLogin() {
-     const auth = await this.$auth.providerLogin()
-      .then((user) => {
-        const fullName = user.user.displayName;
-        this.googleUser.firstName = fullName.split(' ')[0];
-        this.googleUser.lastName = fullName.split(' ')[1];
-        this.googleUser.uid = user.user.uid
-        this.googleUser.email = user.user.email;
-        this.googleUser.photoUrl = user.user.photoURL;
-        this.googleUser.idToken = user.credential.idToken;
-        // how to tell if its a first time user or returning with google?
-        //this.getUserProfile(); 
-        // this.saveUserProfile();
-        store.commit('updateAppUser', { appUser: this.googleUser });
-        this.validateToken();
-      })
-      .catch((error) => {
+      const auth = await this.$auth.providerLogin()
+        .then((user) => {
+          const fullName = user.user.displayName;
+          this.googleUser.firstName = fullName.split(' ')[0];
+          this.googleUser.lastName = fullName.split(' ')[1];
+          this.googleUser.uid = user.user.uid;
+          this.googleUser.email = user.user.email;
+          this.googleUser.photoUrl = user.user.photoURL;
+          this.googleUser.idToken = user.credential.idToken;
+          // how to tell if its a first time user or returning with google?
+          // this.getUserProfile();
+          // this.saveUserProfile();
+          store.commit('updateAppUser', { appUser: this.googleUser });
+          this.validateToken();
+        })
+        .catch((error) => {
         // Handle Errors here.
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        // The email of the user's account used.
-        var email = error.email;
-        // The firebase.auth.AuthCredential type that was used.
-        var credential = error.credential;
-      })
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          // The email of the user's account used.
+          const email = error.email;
+          // The firebase.auth.AuthCredential type that was used.
+          const credential = error.credential;
+        });
     },
     validateToken() {
-      
       this.$router.push('/home');
-    }
-  }
+    },
+  },
 };
 </script>
 <style scoped lang="scss">
@@ -101,7 +101,7 @@ export default {
     transition-duration: 10ms;
   }
 }
-    
+
 .google-button__icon {
   display: inline-block;
   vertical-align: middle;

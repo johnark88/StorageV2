@@ -17,7 +17,7 @@
           </b-form-input>
         </b-form-group>
         <b-form-group id="loginEmail" label-for="loginEmail">
-          <b-form-input id="loginEmail" type="email" v-model="loginUser.email" 
+          <b-form-input id="loginEmail" type="email" v-model="loginUser.email"
             v-validate="'required|email'" placeholder="Enter email" name="Email"></b-form-input>
         </b-form-group>
         <b-form-group id="loginPassword" label-for="loginPassword">
@@ -40,7 +40,7 @@ export default {
   name: 'signInRegister',
   data() {
     return {
-       showRegister: false,
+      showRegister: false,
       // return users
       loginUser: {
         firstName: null,
@@ -84,12 +84,12 @@ export default {
         })
         .catch((error) => {
           // Handle Errors here.
-          var errorCode = error.code;
-          var errorMessage = error.message;
+          const errorCode = error.code;
+          const errorMessage = error.message;
           console.log(errorCode, ' code', errorMessage, 'msg');
         });
-    }
-  }
+    },
+  },
 };
 </script>
 <style scoped lang="scss">

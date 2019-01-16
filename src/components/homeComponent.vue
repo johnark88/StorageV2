@@ -6,6 +6,7 @@
 
 <script>
 import { mapGetters } from 'vuex';
+
 export default {
   name: 'homeComponent',
   data() {
@@ -18,13 +19,13 @@ export default {
   },
   watch: {
     user(auth) {
-      if(!auth) {
+      if (!auth) {
         this.$router.push('/login');
       }
-    }
+    },
   },
   methods: {
-    
+
   },
 };
 </script>
