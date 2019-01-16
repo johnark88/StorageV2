@@ -2,7 +2,7 @@
   <div class="signInView">
     <b-container fluid class="signInContainer">
       <b-row align-h="center" class="mainRow" no-gutters>
-        <b-col sm="4">
+        <b-col sm="4" class="signInContentCol">
           <h4>Blah blah blahg</h4>
         </b-col>
         <b-col sm="5">
