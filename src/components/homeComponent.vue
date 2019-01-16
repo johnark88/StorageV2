@@ -1,9 +1,11 @@
 <template>
   <div class="homeComponent">
+    <p>component</p>
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 export default {
   name: 'homeComponent',
   data() {
@@ -11,8 +13,18 @@ export default {
 
     };
   },
+  computed: {
+    ...mapGetters(['user']),
+  },
+  watch: {
+    user(auth) {
+      if(!auth) {
+        this.$router.push('/login');
+      }
+    }
+  },
   methods: {
-
+    
   },
 };
 </script>
