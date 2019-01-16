@@ -8,11 +8,9 @@
     </b-navbar-brand>
     <b-collapse is-nav id="nav_text_collapse">
       <b-navbar-nav >
-        <b-nav-item><router-link to="#">Home</router-link></b-nav-item>
+        <b-nav-item><router-link to="/home">Home</router-link></b-nav-item>
         <b-nav-item><router-link to="#">Upload</router-link></b-nav-item>
         <b-nav-item><router-link to="#">Files</router-link></b-nav-item>
-        <!-- <b-nav-item><router-link to="/">Home</router-link></b-nav-item>
-        <b-nav-item><router-link to="/">Home</router-link></b-nav-item> -->
         <b-nav-item-dropdown text="User" right>
           <b-dropdown-item href="#">Account</b-dropdown-item>
           <b-dropdown-item href="#">Settings</b-dropdown-item>

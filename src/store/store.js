@@ -14,7 +14,6 @@ const mutations = {
   },
   updateAppUser(state, payLoad) {
     state.appUser = payLoad.appUser;
-    console.log(state.appUser);
   },
 };
 const actions = {
