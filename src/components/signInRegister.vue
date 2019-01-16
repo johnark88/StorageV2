@@ -3,8 +3,8 @@
     <b-card class="userLoginCard">
       <b-form @submit.prevent="submit" id="loginForm">
         <div class="signUpLink">
-          <b-link class="register" @click="decidedUser">or Sign Up</b-link>
-          <b-link></b-link>
+          <b-link v-show="!showRegister" class="register" @click="decidedUser">or Sign up</b-link>
+          <b-link v-show="showRegister" class="register" @click="decidedUser">Back to Sign in</b-link>
         </div>
         <b-form-group id="loginFirstName" label-for="loginFirstName" v-show="showRegister">
           <b-form-input id="loginFirstName" type="text" v-model="loginUser.firstName" v-validate="'required'"
@@ -27,7 +27,7 @@
         <b-form-text class="text-muted">This page is protected by reCAPTCHA, and subject to the Google <a href="https://www.google.com/policies/privacy/">Privacy Policy</a> and <a href="https://www.google.com/policies/terms/">Terms of service.</a></b-form-text>
         <div class="signInOptions">
           <b-btn @click="login" v-show="!showRegister">Sign in</b-btn>
-           <b-btn @click="register" v-show="showRegister">Sign Up</b-btn>
+           <b-btn @click="register" v-show="showRegister">Sign up</b-btn>
           <!-- checkBox = remeber me -->
           <!-- forgot password -->
         </div>
@@ -57,11 +57,12 @@ export default {
   },
   methods: {
     decidedUser() {
-      console.log(this.showRegister);
       if (this.showRegister === false) {
         this.showRegister = true;
+        this.$emit('showRegister', this.showRegister);
       } else {
         this.showRegister = false;
+        this.$emit('showRegister', this.showRegister);
       }
     },
     async login() {
