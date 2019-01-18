@@ -5,7 +5,7 @@
         <b-col sm="4" class="signInContentCol">
           <h4>Blah blah blahg</h4>
         </b-col>
-        <b-col sm="5">
+        <b-col sm="4">
           <!-- google sign in button -->
           <googleSignIn v-bind:showRegisterForm="showRegisterForm"/>
           <hr>

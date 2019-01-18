@@ -4,7 +4,7 @@
       <b-row>
         <b-col>
           <h1>You have Signed out</h1>
-          <h4><router-link to="/login">Log back in</router-link></h4>
+          <h4><router-link to="/login" replace>Log back in</router-link></h4>
         </b-col>
       </b-row>
     </b-container>

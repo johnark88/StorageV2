@@ -36,6 +36,7 @@
   </div>
 </template>
 <script>
+import { mapGetters } from 'vuex';
 export default {
   name: 'signInRegister',
   data() {
@@ -54,6 +55,19 @@ export default {
       },
     };
   },
+  computed: {
+    ...mapGetters(['user']),
+  },
+  watch: {
+    user(auth) {
+      if (!auth) {
+        // this.$router.replace('/login');
+      } else {
+        console.log(auth, 'sign in register');
+        this.userStatus = true;
+      }
+    },
+  },
   methods: {
     decidedUser() {
       if (this.showRegister === false) {
@@ -71,7 +85,7 @@ export default {
       this.userid = auth.user.uid;
       // this.getUserProfile();
       // this.authorizeToken();
-      this.$router.push('/home');
+      this.$router.replaec('/home');
     },
     async register() {
       const email = this.newUser.email;

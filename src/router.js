@@ -30,14 +30,6 @@ const router = new Router({
       component: () => import(/* webpackChunkName: "about" */ './views/signInView.vue'),
     },
     {
-      path: '/signout',
-      name: 'Sign out',
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "about" */ './views/signOut.vue'),
-    },
-    {
       path: '/home',
       name: 'home',
       // route level code-splitting
@@ -48,15 +40,25 @@ const router = new Router({
         authRequired: true,
       },
     },
+    {
+      path: '/signout',
+      name: 'Sign out',
+      // route level code-splitting
+      // this generates a separate chunk (about.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import(/* webpackChunkName: "about" */ './views/signOut.vue'),
+    },
   ],
 });
 
 router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.authRequired)) {
+    // console.log(store.state.user, 'user');
     if (!store.state.user) {
-      router.push('/');
+      next();
+      // { path: '/login', replace: true }
     } else {
-      router.push('/home');
+      next();
     }
   } else {
     next();
