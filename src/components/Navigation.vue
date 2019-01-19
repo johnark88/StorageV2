@@ -3,7 +3,7 @@
 <b-navbar toggleable class="mainNavBar">
   <b-navbar-toggle target="nav_text_collapse"></b-navbar-toggle>
     <b-navbar-brand href="/home">
-      <img src="https://placekitten.com/g/30/30" class="d-inline-block align-top" alt="BV">
+      <!-- <img src="https://placekitten.com/g/30/30" class="d-inline-block align-top" alt="BV"> -->
       BootstrapVue
     </b-navbar-brand>
     <b-collapse is-nav id="nav_text_collapse">

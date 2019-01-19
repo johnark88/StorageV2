@@ -1,16 +1,27 @@
 <template>
   <div class="home">
-    <b-container>
+    <b-container class="homeContainer">  
       <b-row>
-        <b-col>
-          <h1>Welcome Home page</h1>
-          <homeComponent />
-        </b-col>
+          <b-card title="cardTitle" sub-title="subTitle" img-src="https://picsum.photos/600/300/?image=23"
+            img-alt="Image" img-top tag="article" class="folderCard">
+            <b-link href="#"> 
+              <b-dropdown no-caret variant="link" class="cardDropDown">
+                <template slot="button-content">
+                  <font-awesome-icon :icon="['fas', 'ellipsis-h']" /><span class="sr-only">Search</span>
+                </template>
+                <b-dropdown-item>Batman</b-dropdown-item>
+                <b-dropdown-item>Robin</b-dropdown-item>
+                <b-dropdown-item>Caveman</b-dropdown-item>
+              </b-dropdown>
+            </b-link>
+            <b-link href="#" class="card-link">  </b-link>
+          </b-card>
       </b-row>
     </b-container>
   </div>
 </template>
 <script>
+// <homeComponent />
 import homeComponent from '@/components/homeComponent.vue';
 
 export default {
@@ -20,6 +31,9 @@ export default {
   },
   data() {
     return {
+      // cardTitle: 'Batman',
+      // subTitle: 'Shared / Private / Due',
+      // imgUrl: '',
 
     };
   },
@@ -29,5 +43,25 @@ export default {
 };
 </script>
 <style scoped lang="scss">
+.homeContainer {
+  margin-top: 4em;
+}
+.folderCard {
+  text-align: left;
+  // margin: 20px;
+  max-width: 20rem;
+  max-height: 23em;
+}
+.card-body {
+  padding: 1em;
+}
+.card-text {
 
+}
+// Drop down arrow/border box
+.cardDropDown {
+  color: black; 
+  background-color: white; 
+  border-color: white; 
+}
 </style>
