@@ -37,8 +37,6 @@
 </template>
 <script>
 import userService from  '../services/userService';
-import { mapGetters } from 'vuex';
-
 export default {
   name: 'signInRegister',
   data() {
@@ -56,9 +54,6 @@ export default {
         idToken: null,
       },
     };
-  },
-  computed: {
-    ...mapGetters(['user']),
   },
   watch: {
     user(auth) {

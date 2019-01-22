@@ -65,11 +65,14 @@ const router = new Router({
 });
 
 router.beforeEach((to, from, next) => {
+  const loggedIn = !!TokenService.getToken();
   if (to.matched.some(record => record.meta.authRequired)) {
     // console.log(store.state.user, 'user');
-    if (!store.state.user) {
-      next();
-      // { path: '/login', replace: true }
+    if (!loggedIn) {
+      next({
+        path: '/login',
+        query: { redirect: to.fullPath },
+      });
     } else {
       next();
     }

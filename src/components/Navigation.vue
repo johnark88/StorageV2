@@ -24,7 +24,8 @@
   </div>
 </template>
 <script>
-import { mapGetters } from 'vuex';
+import userService from  '../services/userService';
+import { TokenService } from '../services/TokenService';
 
 export default {
   name: 'Navigation',
@@ -32,9 +33,6 @@ export default {
     return {
       userStatus: false,
     };
-  },
-  computed: {
-    ...mapGetters(['user']),
   },
   watch: {
     user(auth) {

@@ -1,6 +1,7 @@
 import firebase from 'firebase/app';
 import store from '../store/store';
 import { TokenService } from './TokenService';
+import apiService from './apiService';
 import 'firebase/auth';
 
 const config = {
@@ -22,7 +23,35 @@ const auth = firebase.auth();
 
 const userService = {
   providerLogin: async () => {
-    return auth.signInWithPopup(provider);
+    auth.signInWithPopup(provider)
+      .then((user) => {
+        // const fullName = user.user.displayName;
+        // firstName = fullName.split(' ')[0];
+        // lastName = fullName.split(' ')[1];
+        // uid = user.user.uid;
+        // email = user.user.email;
+        // photoUrl = user.user.photoURL;
+        // idToken = user.credential.idToken;
+        // accessToken = user.credential.accessToken;
+        // how to tell if its a first time user or returning with google?
+        // this.getUserProfile();
+        // this.saveUserProfile();
+        TokenService.saveToken(user.credential.accessToken);
+        apiService.setHeader(user.credential.accessToken);
+        return user.credential.accessToken;
+      })
+      .catch((error) => {
+        const sendErrors = [];
+        // Handle Errors here.
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // The email of the user's account used.
+        const email = error.email;
+        // The firebase.auth.AuthCredential type that was used.
+        const credential = error.credential;
+        sendErrors.push(errorCode, errorMessage, email, credential);
+        return sendErrors;
+      });
   },
   login: async (email, password) => {
     return auth.signInWithEmailAndPassword(email, password);
@@ -32,14 +61,9 @@ const userService = {
   },
   logout: async () => {
     await auth.signOut();
-  },
-  authState: async (user) => {
-    auth.onAuthStateChanged((user) => {
-      store.commit('updateUser', { user });
-      // store.commit('updateAppUser', { appUser: null });
-    });
-  },
 
+  },
+  // verify Token with backend - firebase
 };// end userService
 
 export default userService;

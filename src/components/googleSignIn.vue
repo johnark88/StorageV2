@@ -17,7 +17,6 @@
   </div>
 </template>
 <script>
-import store from '../store/store';
 import userService from  '../services/userService';
 import { TokenService } from '../services/TokenService';
 
@@ -41,36 +40,8 @@ export default {
   },
   methods: {
     async googleLogin() {
-      const auth = await userService.providerLogin()
-        .then((user) => {
-          const fullName = user.user.displayName;
-          this.googleUser.firstName = fullName.split(' ')[0];
-          this.googleUser.lastName = fullName.split(' ')[1];
-          this.googleUser.uid = user.user.uid;
-          this.googleUser.email = user.user.email;
-          this.googleUser.photoUrl = user.user.photoURL;
-          this.googleUser.idToken = user.credential.idToken;
-          this.googleUser.accessToken = user.credential.accessToken;
-         
-          // how to tell if its a first time user or returning with google?
-          // this.getUserProfile();
-          // this.saveUserProfile();
-          console.log(this.googleUser, 'googs');
-          store.commit('updateAppUser', { appUser: this.googleUser });
-          TokenService.saveToken(this.googleUser.accessToken);
-          this.validateToken();
-        })
-        .catch((error) => {
-        // Handle Errors here.
-          const errorCode = error.code;
-          const errorMessage = error.message;
-          // The email of the user's account used.
-          const email = error.email;
-          // The firebase.auth.AuthCredential type that was used.
-          const credential = error.credential;
-        });
-    },
-    validateToken() {
+      const auth = await userService.providerLogin();
+      console.log(auth, 'auth');
       this.$router.push('/home');
     },
   },
