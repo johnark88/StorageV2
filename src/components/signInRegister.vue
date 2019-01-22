@@ -36,7 +36,9 @@
   </div>
 </template>
 <script>
+import userService from  '../services/userService';
 import { mapGetters } from 'vuex';
+
 export default {
   name: 'signInRegister',
   data() {
@@ -61,7 +63,7 @@ export default {
   watch: {
     user(auth) {
       if (!auth) {
-        // this.$router.replace('/login');
+        this.$router.replace('/');
       } else {
         console.log(auth, 'sign in register');
         this.userStatus = true;
@@ -81,7 +83,7 @@ export default {
     async login() {
       const email = this.newUser.email;
       const password = this.newUser.password;
-      const auth = await this.$auth.login(email, password);
+      const auth = await userService.login(email, password);
       this.userid = auth.user.uid;
       // this.getUserProfile();
       // this.authorizeToken();
@@ -90,7 +92,7 @@ export default {
     async register() {
       const email = this.newUser.email;
       const password = this.newUser.password;
-      const newAuth = await this.$auth.register(email, password)
+      const newAuth = await userService.register(email, password)
         .then((user) => {
           console.log(user, 'user');
           // this.saveUserProfile();

@@ -18,6 +18,8 @@
 </template>
 <script>
 import store from '../store/store';
+import userService from  '../services/userService';
+import { TokenService } from '../services/TokenService';
 
 export default {
   name: 'googleSignIn',
@@ -33,12 +35,13 @@ export default {
         photoUrl: null,
         usedGoogle: true,
         idToken: null,
+        accessToken: null,
       },
     };
   },
   methods: {
     async googleLogin() {
-      const auth = await this.$auth.providerLogin()
+      const auth = await userService.providerLogin()
         .then((user) => {
           const fullName = user.user.displayName;
           this.googleUser.firstName = fullName.split(' ')[0];
@@ -47,10 +50,14 @@ export default {
           this.googleUser.email = user.user.email;
           this.googleUser.photoUrl = user.user.photoURL;
           this.googleUser.idToken = user.credential.idToken;
+          this.googleUser.accessToken = user.credential.accessToken;
+         
           // how to tell if its a first time user or returning with google?
           // this.getUserProfile();
           // this.saveUserProfile();
+          console.log(this.googleUser, 'googs');
           store.commit('updateAppUser', { appUser: this.googleUser });
+          TokenService.saveToken(this.googleUser.accessToken);
           this.validateToken();
         })
         .catch((error) => {

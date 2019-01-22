@@ -2,7 +2,7 @@
   <div class="home">
     <b-container class="homeContainer">  
       <b-row>
-          <b-card title="cardTitle" sub-title="subTitle" img-src="https://picsum.photos/600/300/?image=23"
+          <b-card title="cardTitle" sub-title="subTitle" img-src="https://picsum.photos/600/300/?image=909"
             img-alt="Image" img-top tag="article" class="folderCard">
             <b-link href="#"> 
               <b-dropdown no-caret variant="link" class="cardDropDown">
@@ -14,7 +14,9 @@
                 <b-dropdown-item>Caveman</b-dropdown-item>
               </b-dropdown>
             </b-link>
-            <b-link href="#" class="card-link">  </b-link>
+            <div class="cardLink">
+              <b-link href="/files" class="card-link"> View files</b-link>
+            </div>
           </b-card>
       </b-row>
     </b-container>
@@ -55,8 +57,9 @@ export default {
 .card-body {
   padding: 1em;
 }
-.card-text {
-
+.cardLink{
+  float: right;
+  text-decoration: none;
 }
 // Drop down arrow/border box
 .cardDropDown {

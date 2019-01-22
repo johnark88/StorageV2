@@ -7,10 +7,20 @@ import './plugins/vee-validate';
 import App from './App.vue';
 import router from './router';
 import store from './store/store';
+import { TokenService } from './services/TokenService';
 import './registerServiceWorker';
-import FirebasePlugin from '../firebasePlugin';
+import ApiService from './services/apiService';
 
-Vue.use(FirebasePlugin);
+
+// Vue.use(FirebasePlugin);
+// Set the base URL of the API
+ApiService.init(process.env.VUE_APP_ROOT_API);
+
+// If token exists set header
+// if (TokenService.getToken()) {
+//   ApiService.setHeader();
+// }
+
 Vue.config.productionTip = false;
 
 new Vue({
