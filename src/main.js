@@ -15,11 +15,11 @@ import ApiService from './services/apiService';
 // Vue.use(FirebasePlugin);
 // Set the base URL of the API
 ApiService.init(process.env.VUE_APP_ROOT_API);
-
+console.log(process.env.VUE_APP_ROOT_API);
 // If token exists set header
-// if (TokenService.getToken()) {
-//   ApiService.setHeader();
-// }
+if (TokenService.getToken()) {
+  ApiService.setHeader();
+}
 
 Vue.config.productionTip = false;
 

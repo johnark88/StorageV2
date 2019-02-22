@@ -20,10 +20,10 @@
           </b-card>
       </b-row>
     </b-container>
+     <homeComponent />
   </div>
 </template>
 <script>
-// <homeComponent />
 import homeComponent from '@/components/homeComponent.vue';
 
 export default {
