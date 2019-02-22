@@ -4,7 +4,7 @@
   <b-navbar-toggle target="nav_text_collapse"></b-navbar-toggle>
     <b-navbar-brand href="/home">
       <!-- <img src="https://placekitten.com/g/30/30" class="d-inline-block align-top" alt="BV"> -->
-      BootstrapVue
+      Storage App
     </b-navbar-brand>
     <b-collapse is-nav id="nav_text_collapse">
       <!-- <b-navbar-nav >
@@ -24,14 +24,14 @@
   </div>
 </template>
 <script>
-import userService from  '../services/userService';
+import userService  from  '../services/userService';
 import { TokenService } from '../services/TokenService';
 
 export default {
   name: 'Navigation',
   data() {
     return {
-      userStatus: false,
+      userStatus: true,
     };
   },
   watch: {
@@ -46,8 +46,7 @@ export default {
   },
   methods: {
     async signOut() {
-      console.log('logging out');
-      await this.$auth.logout();
+      await userService.logout();
       this.$router.replace('/signout');
     },
   },
