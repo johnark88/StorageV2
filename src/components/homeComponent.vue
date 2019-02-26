@@ -1,6 +1,27 @@
 <template>
   <div class="homeComponent">
-    
+    <b-container class="homeContainer">  
+      <b-row>
+        <div v-for="(bucket, index) in bucketList" :key="index" class="">
+          <b-card :title="bucket.name" :sub-title="subTitle" img-src="https://picsum.photos/600/300/?image=909"
+            img-alt="Image" img-top tag="article" class="folderCard">
+            <b-link href="#"> 
+              <b-dropdown no-caret variant="link" class="cardDropDown">
+                <template slot="button-content">
+                  <font-awesome-icon :icon="['fas', 'ellipsis-h']" /><span class="sr-only">Search</span>
+                </template>
+                <b-dropdown-item>Share</b-dropdown-item>
+                <b-dropdown-item>Archive</b-dropdown-item>
+                <b-dropdown-item>Delete</b-dropdown-item>
+              </b-dropdown>
+            </b-link>
+            <div class="cardLink">
+              <b-link href="/files" class="card-link"> View files</b-link>
+            </div>
+          </b-card>
+        </div>
+      </b-row>
+    </b-container>
   </div>
 </template>
 
@@ -13,10 +34,17 @@ export default {
     return {
       // Bucket holdes the folders
       storageBucket: '',
+      bucketList: [],
       // Folders hold the files
       folderList: [],
       fileList: [],
+      cardTitle: 'Client',
+      subTitle: 'Shared / Private / Due',
+      // imgUrl: '',
     };
+  },
+  mounted() {
+    this.getBuckets();
   },
   methods: {
     /** Get Storage */ 
@@ -26,7 +54,8 @@ export default {
         url: "/api/buckets",
       };
       const response = await apiService.customRequest(requestData);
-      console.log(response, 'res');
+      console.log(response.data, 'res');
+      this.bucketList = response.data;
     },
     /** Get folders - need bucket name */ 
     async getBucketObject(storageName) {
@@ -52,6 +81,3 @@ export default {
   },
 };
 </script>
-<style scoped lang="scss">
-
-</style>
