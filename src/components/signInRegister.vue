@@ -82,7 +82,7 @@ export default {
       this.userid = auth.user.uid;
       // this.getUserProfile();
       // this.authorizeToken();
-      this.$router.replaec('/home');
+      this.$router.replace('/home');
     },
     async register() {
       const email = this.newUser.email;

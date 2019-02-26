@@ -41,7 +41,6 @@ export default {
   methods: {
     async googleLogin() {
       const auth = await userService.providerLogin();
-      console.log(auth, 'auth');
       this.$router.push('/home');
     },
   },

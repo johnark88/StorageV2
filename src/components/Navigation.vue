@@ -31,21 +31,26 @@ export default {
   name: 'Navigation',
   data() {
     return {
-      userStatus: true,
+      userStatus: false,
+      userAuth: null,
     };
   },
-  watch: {
-    user(auth) {
+  mounted() {
+    this.checkUser();
+  },
+  methods: {
+    checkUser() {
+      const auth = TokenService.getToken();
       if (!auth) {
-        console.log('no auth')
+        console.log('No auth')
         this.$router.replace('/login');
       } else {
+        console.log('Yes Auth')
         this.userStatus = true;
       }
     },
-  },
-  methods: {
     async signOut() {
+      TokenService.removeToken();
       await userService.logout();
       this.$router.replace('/signout');
     },

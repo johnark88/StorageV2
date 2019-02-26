@@ -13,7 +13,6 @@ const TokenService = {
   },
 
   saveToken(accessToken) {
-    console.log('here', accessToken);
     localStorage.setItem(TOKEN_KEY, accessToken);
   },
 
